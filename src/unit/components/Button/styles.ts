@@ -1,12 +1,14 @@
 import { Sizes } from '.'
 
 const baseButtonClasses = [
-  'bg-[#ea4c89]',
+  'bg-pink-600',
   'rounded',
   'flex',
   'text-white',
   'hover:opacity-90',
-  'transition'
+  'transition',
+  'disabled:opacity-70',
+  'disabled:cursor-not-allowed'
 ]
 
 const buttonClassesVariants = {

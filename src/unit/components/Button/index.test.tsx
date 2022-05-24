@@ -10,13 +10,13 @@ describe('<Button />', () => {
          se realmente a alteração é necessária
          https://jestjs.io/docs/snapshot-testing#:~:text=Snapshot%20tests%20are%20a%20very,file%20stored%20alongside%20the%20test.
   */
-  it.todo('should render the button correctly')
+  it.todo('should render the medium size be default')
 
   /*
     Os próximos testes a gente vai testando todas as variações e interações do módulo,
-    separando cada uma em um it separado
+    separando cada um em um it próprio
   */
   it.todo('should render the small button variant')
   it.todo('should render the big button variant')
-  it.todo('should call onClick after click')
+  it.todo('should render a disabled button')
 })
