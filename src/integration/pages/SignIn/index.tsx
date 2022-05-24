@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import Button from 'unit/components/Button'
-import TextField from 'unit/components/TextField'
+
+import SignInForm from 'unit/components/SignInForm'
 
 function SignIn() {
   const [x, setX] = useState(0)
@@ -11,15 +11,7 @@ function SignIn() {
 
   return (
     <div>
-      <h1>Hello</h1>
-      <Button onClick={() => {}}>I'am a button</Button>
-      <Button onClick={() => {}} size="sm">
-        I'am a button
-      </Button>
-      <Button onClick={() => {}} disabled size="lg">
-        I'am a button
-      </Button>
-      <TextField />
+      <SignInForm />
     </div>
   )
 }

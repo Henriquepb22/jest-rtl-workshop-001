@@ -3,7 +3,7 @@ import { Sizes } from '.'
 const baseButtonClasses = [
   'bg-pink-600',
   'rounded',
-  'flex',
+  'w-full',
   'text-white',
   'hover:opacity-90',
   'transition',
