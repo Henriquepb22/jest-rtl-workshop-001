@@ -12,6 +12,12 @@ function App() {
     <div>
       <h1>Hello</h1>
       <Button onClick={() => {}}>I'am a button</Button>
+      <Button onClick={() => {}} size="sm">
+        I'am a button
+      </Button>
+      <Button onClick={() => {}} size="lg">
+        I'am a button
+      </Button>
     </div>
   )
 }
