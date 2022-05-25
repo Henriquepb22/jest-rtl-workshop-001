@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { FieldErrors, signInValidate } from 'utils/validations'
 import { useUser } from 'unit/hooks/use-user'
 import TextField from '../TextField'
 import Button from '../Button'
@@ -10,6 +11,7 @@ const SignInForm = () => {
   const { login } = useUser()
   const [values, setValues] = useState({ username: '', password: '' })
   const [loading, setLoading] = useState(false)
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
 
   const handleInput = (field: string, value: string) =>
     setValues((oldValues) => ({ ...oldValues, [field]: value }))
@@ -17,9 +19,17 @@ const SignInForm = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    const errors = signInValidate(values)
+
+    if (Object.keys(errors).length) {
+      setFieldErrors(errors)
+      setLoading(false)
+      return
+    }
+    setFieldErrors({})
+
     await login(values)
     setLoading(false)
-    console.log(values)
   }
 
   return (
@@ -28,18 +38,16 @@ const SignInForm = () => {
         label="Usuário"
         name="username"
         placeholder="Insira seu nome de usuário"
-        minLength={4}
         onInputChange={(v) => handleInput('username', v)}
-        required
+        error={fieldErrors?.username}
       />
       <TextField
         label="Senha"
         name="password"
         type="password"
         placeholder="Insira sua senha"
-        minLength={4}
         onInputChange={(v) => handleInput('password', v)}
-        required
+        error={fieldErrors?.password}
       />
       <Button disabled={loading}>{loading ? 'Carregando...' : 'Entrar'}</Button>
     </form>

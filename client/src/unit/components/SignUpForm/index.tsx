@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { FieldErrors } from 'utils/validations'
+import { FieldErrors, signUpValidate } from 'utils/validations'
 import { useUser } from 'unit/hooks/use-user'
 import { signUp } from 'services/users'
 import TextField from '../TextField'
@@ -8,10 +8,16 @@ import Button from '../Button'
 
 import { signUpFormClasses } from './styles'
 
+export type SignUpFormValues = {
+  username: string
+  password: string
+  confirm_password: string
+}
+
 const SignUpForm = () => {
   const { login } = useUser()
-  const [values, setValues] = useState({
-    login: '',
+  const [values, setValues] = useState<SignUpFormValues>({
+    username: '',
     password: '',
     confirm_password: ''
   })
@@ -24,7 +30,16 @@ const SignUpForm = () => {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const { login: username, password } = values
+
+    const errors = signUpValidate(values)
+    if (Object.keys(errors).length) {
+      setFieldError(errors)
+      setLoading(false)
+      return
+    }
+    setFieldError({})
+
+    const { username, password } = values
     await signUp(username, password)
     await login({ username, password })
     setLoading(false)
@@ -34,29 +49,26 @@ const SignUpForm = () => {
     <form onSubmit={onSubmit} className={signUpFormClasses}>
       <TextField
         label="Usuário"
-        name="login"
+        name="username"
         placeholder="Insira seu nome de usuário"
-        minLength={4}
-        onInputChange={(v) => handleInput('login', v)}
-        required
+        onInputChange={(v) => handleInput('username', v)}
+        error={fieldError?.username}
       />
       <TextField
         label="Senha"
         name="password"
         type="password"
         placeholder="Insira sua senha"
-        minLength={4}
         onInputChange={(v) => handleInput('password', v)}
-        required
+        error={fieldError?.password}
       />
       <TextField
         label="Confirmar Senha"
         name="confirm_password"
         type="password"
         placeholder="Confirme sua senha"
-        minLength={4}
         onInputChange={(v) => handleInput('confirm_password', v)}
-        required
+        error={fieldError?.confirm_password}
       />
       <Button disabled={loading}>
         {loading ? 'Carregando...' : 'Criar conta'}
