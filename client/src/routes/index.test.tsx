@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 
-describe('<App />', () => {
+describe('<AppRoutes />', () => {
   /*
     Não faz sentido testar uma biblioteca externa, a gente infere(?) que ela
     já está testada, mas a gente precisa garantir que nossa funcionalidade está 

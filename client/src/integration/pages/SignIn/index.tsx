@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 
 import SignInForm from 'unit/components/SignInForm'
 
 function SignIn() {
-  const [x, setX] = useState(0)
+  // const [x, setX] = useState(0)
 
-  useEffect(() => {
-    if (x === 1) return
-  }, [])
+  // useEffect(() => {
+  //   if (x === 1) return
+  // }, [])
 
   return (
     <div>

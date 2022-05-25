@@ -5,7 +5,7 @@ import { UserProvider } from 'unit/hooks/use-user'
 const SignIn = lazy(() => import('integration/pages/SignIn'))
 const SignUp = lazy(() => import('integration/pages/SignUp'))
 
-const App = () => (
+const AppRoutes = () => (
   <UserProvider>
     <BrowserRouter>
       <Routes>
@@ -17,4 +17,4 @@ const App = () => (
   </UserProvider>
 )
 
-export default App
+export default AppRoutes
