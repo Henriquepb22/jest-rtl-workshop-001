@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
+import { useUser } from 'unit/hooks/use-user'
 import TextField from '../TextField'
 import Button from '../Button'
 
 import { signInFormClasses } from './styles'
-import { useUser } from 'unit/hooks/use-user'
 
 const SignInForm = () => {
   const { login } = useUser()
   const [values, setValues] = useState({ username: '', password: '' })
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
 
   const handleInput = (field: string, value: string) =>
     setValues((oldValues) => ({ ...oldValues, [field]: value }))
@@ -23,8 +21,6 @@ const SignInForm = () => {
     setLoading(false)
     console.log(values)
   }
-
-  const handleCreateAccount = () => navigate('/signup')
 
   return (
     <form onSubmit={onSubmit} className={signInFormClasses}>
@@ -46,14 +42,6 @@ const SignInForm = () => {
         required
       />
       <Button disabled={loading}>{loading ? 'Carregando...' : 'Entrar'}</Button>
-      <Button
-        color="secondary"
-        disabled={loading}
-        type="button"
-        onClick={handleCreateAccount}
-      >
-        Criar Conta
-      </Button>
     </form>
   )
 }

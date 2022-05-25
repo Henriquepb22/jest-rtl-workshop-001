@@ -13,7 +13,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
-    "test:watch": "yarn test --watch",
     "lint": "eslint src",
     "eject": "react-scripts eject"
   },

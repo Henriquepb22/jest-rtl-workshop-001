@@ -1,17 +1,19 @@
-// import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import SignUpForm from 'unit/components/SignUpForm'
+import Button from 'unit/components/Button'
+
+import { signUpClasses } from './styles'
 
 function SignUp() {
-  // const [x, setX] = useState(0)
-
-  // useEffect(() => {
-  //   if (x === 1) return
-  // }, [])
+  const navigate = useNavigate()
 
   return (
-    <div>
+    <div className={signUpClasses}>
       <SignUpForm />
+      <Button onClick={() => navigate('/')} color="secondary">
+        Voltar
+      </Button>
     </div>
   )
 }
