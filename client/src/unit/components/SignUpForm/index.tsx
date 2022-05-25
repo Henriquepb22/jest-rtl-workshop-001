@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 
 import { FieldErrors } from 'utils/validations'
+import { useUser } from 'unit/hooks/use-user'
+import { signUp } from 'services/users'
 import TextField from '../TextField'
 import Button from '../Button'
 
+import { signUpFormClasses } from './styles'
+
 const SignUpForm = () => {
+  const { login } = useUser()
   const [values, setValues] = useState({
     login: '',
     password: '',
@@ -16,14 +21,17 @@ const SignUpForm = () => {
   const handleInput = (field: string, value: string) =>
     setValues((oldValues) => ({ ...oldValues, [field]: value }))
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    console.log(values)
+    const { login: username, password } = values
+    await signUp(username, password)
+    await login({ username, password })
+    setLoading(false)
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col w-80">
+    <form onSubmit={onSubmit} className={signUpFormClasses}>
       <TextField
         label="Usuário"
         name="login"
@@ -50,11 +58,9 @@ const SignUpForm = () => {
         onInputChange={(v) => handleInput('confirm_password', v)}
         required
       />
-      <div className="mt-2">
-        <Button disabled={loading}>
-          {loading ? 'Carregando...' : 'Criar conta'}
-        </Button>
-      </div>
+      <Button disabled={loading}>
+        {loading ? 'Carregando...' : 'Criar conta'}
+      </Button>
     </form>
   )
 }

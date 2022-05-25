@@ -12,8 +12,18 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/"
+          element={
+            authenticated ? <Navigate to="/profile" replace /> : <SignIn />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            authenticated ? <Navigate to="/profile" replace /> : <SignUp />
+          }
+        />
         <Route
           path="/profile"
           element={authenticated ? <Profile /> : <Navigate to="/" replace />}

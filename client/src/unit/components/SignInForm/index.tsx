@@ -1,29 +1,39 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import TextField from '../TextField'
 import Button from '../Button'
 
+import { signInFormClasses } from './styles'
+import { useUser } from 'unit/hooks/use-user'
+
 const SignInForm = () => {
-  const [values, setValues] = useState({ login: '', password: '' })
+  const { login } = useUser()
+  const [values, setValues] = useState({ username: '', password: '' })
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const handleInput = (field: string, value: string) =>
     setValues((oldValues) => ({ ...oldValues, [field]: value }))
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+    await login(values)
+    setLoading(false)
     console.log(values)
   }
 
+  const handleCreateAccount = () => navigate('/signup')
+
   return (
-    <form onSubmit={onSubmit} className="flex flex-col w-80">
+    <form onSubmit={onSubmit} className={signInFormClasses}>
       <TextField
         label="Usuário"
-        name="login"
+        name="username"
         placeholder="Insira seu nome de usuário"
         minLength={4}
-        onInputChange={(v) => handleInput('login', v)}
+        onInputChange={(v) => handleInput('username', v)}
         required
       />
       <TextField
@@ -35,11 +45,15 @@ const SignInForm = () => {
         onInputChange={(v) => handleInput('password', v)}
         required
       />
-      <div className="mt-2">
-        <Button disabled={loading}>
-          {loading ? 'Carregando...' : 'Entrar'}
-        </Button>
-      </div>
+      <Button disabled={loading}>{loading ? 'Carregando...' : 'Entrar'}</Button>
+      <Button
+        color="secondary"
+        disabled={loading}
+        type="button"
+        onClick={handleCreateAccount}
+      >
+        Criar Conta
+      </Button>
     </form>
   )
 }

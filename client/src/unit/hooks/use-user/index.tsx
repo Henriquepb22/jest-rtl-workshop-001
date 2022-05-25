@@ -1,16 +1,22 @@
 import { useContext, createContext, useState } from 'react'
+import { signIn } from 'services/users'
+
+type UserData = {
+  username: string
+  password: string
+}
 
 type UserContextData = {
   authenticated: boolean
   username: string | null
-  login: (username: string, password: string) => void
+  login: ({ username, password }: UserData) => Promise<void | null>
   logout: () => void
 }
 
 export const UserContextDefaultValues = {
   authenticated: false,
   username: null,
-  login: () => null,
+  login: async () => null,
   logout: () => null
 }
 
@@ -26,11 +32,13 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [username, setUsername] = useState<string | null>(null)
 
-  const login = async (username: string, password: string) => {
-    // await login
+  const login = async ({ username, password }: UserData) => {
     try {
-      setIsAuthenticated(true)
-      setUsername(username)
+      const user = await signIn(username, password)
+      if (user) {
+        setIsAuthenticated(true)
+        setUsername(user)
+      }
     } catch (err) {
       console.error('login error: ', err)
     }

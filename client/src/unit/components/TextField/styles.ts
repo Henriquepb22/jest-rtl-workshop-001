@@ -12,11 +12,10 @@ const textFieldClasses = (hasError?: boolean) =>
     'hover:border-pink-600',
     'focus:outline-pink-600',
     'focus:bg-white',
-    'transition',
     hasError ? 'border-red-600' : ''
   ].join(' ')
 
-const labelClasses = ['font-bold', 'text-lg'].join(' ')
+const labelClasses = ['font-bold'].join(' ')
 
 const errorTextClasses = ['text-sm', 'text-red-600'].join(' ')
 

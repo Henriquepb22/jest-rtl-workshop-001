@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import { UserProvider } from 'unit/hooks/use-user'
@@ -8,8 +8,12 @@ import './index.css'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <AppRoutes />
-    </UserProvider>
+    <div className="flex justify-center items-center min-h-screen">
+      <Suspense fallback="Carregando...">
+        <UserProvider>
+          <AppRoutes />
+        </UserProvider>
+      </Suspense>
+    </div>
   </React.StrictMode>
 )
