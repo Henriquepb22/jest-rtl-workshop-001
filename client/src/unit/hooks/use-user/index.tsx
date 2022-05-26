@@ -6,7 +6,7 @@ type UserData = {
   password: string
 }
 
-type UserContextData = {
+export type UserContextData = {
   authenticated: boolean
   username: string | null
   login: ({ username, password }: UserData) => Promise<void | null>

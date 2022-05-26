@@ -37,12 +37,10 @@ function getFieldErrors(objError: Joi.ValidationResult) {
 }
 
 export function signInValidate(values: FieldErrors) {
-  const { username, password } = values
-  const schema = Joi.object(fieldsValidations)
+  const { username, password } = fieldsValidations
+  const schema = Joi.object({ username, password })
 
-  return getFieldErrors(
-    schema.validate({ username, password }, { abortEarly: false })
-  )
+  return getFieldErrors(schema.validate(values, { abortEarly: false }))
 }
 
 export function signUpValidate(values: SignUpFormValues) {

@@ -29,7 +29,6 @@ const SignInForm = () => {
     setFieldErrors({})
 
     await login(values)
-    setLoading(false)
   }
 
   return (
