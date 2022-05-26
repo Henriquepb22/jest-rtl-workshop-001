@@ -32,7 +32,11 @@ const SignInForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className={signInFormClasses}>
+    <form
+      aria-label="Formulário de login" // Comentar
+      onSubmit={onSubmit}
+      className={signInFormClasses}
+    >
       <TextField
         label="Usuário"
         name="username"

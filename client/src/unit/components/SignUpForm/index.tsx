@@ -46,7 +46,11 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className={signUpFormClasses}>
+    <form
+      aria-label="Formulário de cadastro"
+      onSubmit={onSubmit}
+      className={signUpFormClasses}
+    >
       <TextField
         label="Usuário"
         name="username"
