@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../Button'
 
 import { contentClasses, modalClasses, overlayClasses } from './styles'
@@ -10,6 +10,15 @@ type ModalProps = {
 const Modal = ({ children }: ModalProps) => {
   const [open, setOpen] = useState(false)
 
+  useEffect(() => {
+    const handleKeyUp = ({ key }: KeyboardEvent) => {
+      key === 'Escape' && setOpen(false)
+    }
+
+    window.addEventListener('keyup', handleKeyUp)
+    return () => window.removeEventListener('keyup', handleKeyUp)
+  }, [])
+
   return (
     <>
       <Button onClick={() => setOpen(true)}>abrir modal</Button>
@@ -19,6 +28,7 @@ const Modal = ({ children }: ModalProps) => {
         className={modalClasses(open)}
       >
         <div
+          aria-label="fechar modal"
           onClick={() => setOpen((v) => !v)}
           className={overlayClasses(open)}
         />

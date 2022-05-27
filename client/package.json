@@ -18,7 +18,8 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "!src/index.tsx"
+      "!src/index.tsx",
+      "!src/**/*.d.ts"
     ]
   },
   "browserslist": {
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
+    "@testing-library/react-hooks": "^8.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
