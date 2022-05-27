@@ -40,7 +40,7 @@ const UserProvider = ({ children }: UserProviderProps) => {
         setUsername(user)
       }
     } catch (err) {
-      console.error('login error: ', err)
+      console.error(err)
     }
   }
 

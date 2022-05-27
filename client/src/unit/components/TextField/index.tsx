@@ -26,7 +26,7 @@ const TextField = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.currentTarget.value
     setValue(newValue)
-    if (onInputChange) onInputChange(newValue)
+    !!onInputChange && onInputChange(newValue)
   }
 
   return (

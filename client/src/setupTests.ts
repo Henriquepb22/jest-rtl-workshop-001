@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 
 jest.mock('services/users', () => ({
-  signIn: jest.fn((username, password) => Promise.resolve([{ username }])),
+  signIn: (username: string, password: string) => Promise.resolve(username),
   signUp: jest.fn((username, password) => Promise.resolve())
 }))

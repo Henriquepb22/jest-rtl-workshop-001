@@ -1,6 +1,58 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import SignUp from '.'
+
+const mockedNavigate = jest.fn()
+const mockedSignUp = jest.fn()
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate
+}))
+
+jest.mock('services/users', () => ({
+  signUp: () => Promise.resolve(mockedSignUp)
+}))
 
 describe('<SignUp />', () => {
-  it.todo('should render the sign up page with components correctly')
-  it.todo('should fill sign up and submit correctly')
+  it('should render the sign up page with components correctly', () => {
+    render(<SignUp />)
+
+    expect(screen.getByLabelText(/usuário/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/^senha/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/confirmar senha/i)).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /criar conta/i })
+    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /voltar/i })).toBeInTheDocument()
+  })
+
+  it('should call navigate to / page if clicked on go back button', () => {
+    render(<SignUp />)
+
+    userEvent.click(screen.getByRole('button', { name: /voltar/i }))
+    expect(mockedNavigate).toHaveBeenCalled()
+    expect(mockedNavigate).toHaveBeenCalledWith('/')
+  })
+
+  it('should fill sign up and submit correctly', async () => {
+    render(<SignUp />)
+
+    const userData = {
+      username: 'henrique',
+      password: 'senha',
+      confirm_password: 'senha'
+    }
+    const userInput = screen.getByLabelText(/usuário/i)
+    const passwordInput = screen.getByLabelText(/^senha/i)
+    const confirmPasswordInput = screen.getByLabelText(/confirmar senha/i)
+
+    userEvent.type(userInput, userData.username)
+    userEvent.type(passwordInput, userData.password)
+    userEvent.type(confirmPasswordInput, userData.confirm_password)
+
+    userEvent.click(screen.getByRole('button', { name: /criar conta/i }))
+
+    // Signup call
+  })
 })

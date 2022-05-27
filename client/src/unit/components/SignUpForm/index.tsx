@@ -42,7 +42,6 @@ const SignUpForm = () => {
     const { username, password } = values
     await signUp(username, password)
     await login({ username, password })
-    setLoading(false)
   }
 
   return (

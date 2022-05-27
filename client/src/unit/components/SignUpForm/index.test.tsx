@@ -32,6 +32,7 @@ describe('<SignUpForm />', () => {
       fakeUser.username
     )
     userEvent.type(screen.getByLabelText(/^senha/i), fakeUser.password)
+    userEvent.type(screen.getByLabelText(/confirmar senha/i), fakeUser.password)
     userEvent.click(screen.getByRole('button', { name: /criar conta/i }))
 
     expect(screen.getByText(/carregando/i)).toBeInTheDocument()
@@ -42,7 +43,8 @@ describe('<SignUpForm />', () => {
 
     const fakeUser = {
       username: 'hen',
-      password: '123'
+      password: '123',
+      confirm_password: '321'
     }
 
     userEvent.type(
@@ -50,12 +52,17 @@ describe('<SignUpForm />', () => {
       fakeUser.username
     )
     userEvent.type(screen.getByLabelText(/^senha/i), fakeUser.password)
-    userEvent.click(screen.getByRole('button', { name: /entrar/i }))
+    userEvent.type(
+      screen.getByLabelText(/confirmar senha/i),
+      fakeUser.confirm_password
+    )
+    userEvent.click(screen.getByRole('button', { name: /criar conta/i }))
 
     expect(screen.getByText(/senha precisa ter no mínimo/i)).toBeInTheDocument()
     expect(
       screen.getByText(/usuário precisa ter no mínimo/i)
     ).toBeInTheDocument()
+    expect(screen.getByText(/senhas não conferem/i)).toBeInTheDocument()
     expect(screen.queryByText(/carregando/i)).not.toBeInTheDocument()
   })
 })

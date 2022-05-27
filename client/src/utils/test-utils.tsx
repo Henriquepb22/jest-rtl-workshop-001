@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { render } from '@testing-library/react'
+import { render, RenderOptions } from '@testing-library/react'
 
 import {
   UserContextData,
@@ -9,7 +9,7 @@ import {
 
 type CustomRenderProps = {
   userProviderProps?: UserContextData
-}
+} & RenderOptions
 
 const customRender = (
   ui: ReactElement,
