@@ -12,14 +12,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test",
+    "test:coverage": "react-scripts test src --coverage",
     "lint": "eslint src",
     "eject": "react-scripts eject"
   },
   "jest": {
     "collectCoverageFrom": [
       "!src/index.tsx",
-      "!src/**/*.d.ts"
+      "!src/**/*.d.ts",
+      "!src/**/styles.ts"
     ]
   },
   "browserslist": {

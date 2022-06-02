@@ -10,18 +10,7 @@ describe('<Modal />', () => {
     evitar que aumente a quantidade de elementos no dom e de lógica carregada
     sem necessidade
   */
-  it('should find modal content if is opened', () => {
-    render(
-      <Modal>
-        <span>Algum conteúdo do modal</span>
-      </Modal>
-    )
-
-    // expect(
-    //   screen.queryByText(/algum conteúdo do modal/i)
-    // ).not.toBeInTheDocument() esse teste PRECISA passar
-  })
-
+  it.todo('should find modal content only if is opened')
   it.todo('should open modal')
   it.todo('should close modal clicking on overlay')
 })
