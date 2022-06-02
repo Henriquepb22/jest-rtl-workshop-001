@@ -8,22 +8,22 @@ import Routes from '.'
 
 jest.mock('integration/pages/SignIn', () => ({
   __esModule: true,
-  default: function ({ children }: { children: React.ReactNode }) {
-    return <div data-testid="signIn-mock">{children}</div>
+  default: function () {
+    return <div data-testid="signin-mock" />
   }
 }))
 
 jest.mock('integration/pages/SignUp', () => ({
   __esModule: true,
-  default: function ({ children }: { children: React.ReactNode }) {
-    return <div data-testid="signUp-mock">{children}</div>
+  default: function () {
+    return <div data-testid="signup-mock" />
   }
 }))
 
 jest.mock('integration/pages/Profile', () => ({
   __esModule: true,
-  default: function ({ children }: { children: React.ReactNode }) {
-    return <div data-testid="profile-mock">{children}</div>
+  default: function () {
+    return <div data-testid="profile-mock" />
   }
 }))
 
@@ -43,7 +43,7 @@ describe('<AppRoutes />', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByTestId('signIn-mock')).toBeInTheDocument()
+      expect(screen.getByTestId('signin-mock')).toBeInTheDocument()
     })
   })
 
@@ -57,7 +57,7 @@ describe('<AppRoutes />', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByTestId('signUp-mock')).toBeInTheDocument()
+      expect(screen.getByTestId('signup-mock')).toBeInTheDocument()
     })
   })
 
@@ -94,7 +94,7 @@ describe('<AppRoutes />', () => {
     )
 
     await waitFor(() => {
-      expect(screen.getByTestId('signIn-mock')).toBeInTheDocument()
+      expect(screen.getByTestId('signin-mock')).toBeInTheDocument()
     })
   })
 })

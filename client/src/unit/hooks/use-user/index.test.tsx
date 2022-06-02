@@ -1,8 +1,6 @@
-import { render, renderHook } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
+import { renderHook, act } from '@testing-library/react'
 
 import {
-  UserContext,
   UserContextDefaultValues,
   UserProvider,
   UserProviderProps,
@@ -40,8 +38,9 @@ describe('useUser()', () => {
   })
 
   it('should not authenticate if user does not exists', async () => {
-    const signInMock = jest.spyOn(require('services/users'), 'signIn')
-    signInMock.mockReturnValueOnce(Promise.resolve())
+    const signInMock = jest
+      .spyOn(require('services/users'), 'signIn')
+      .mockReturnValueOnce(Promise.resolve())
 
     const { result } = renderHook(() => useUser(), {
       wrapper
@@ -66,7 +65,7 @@ describe('useUser()', () => {
       await result.current.login(fakeUser)
     })
 
-    expect(result.current.username).toBe('henrique')
+    expect(result.current.username).toStrictEqual('henrique')
     expect(result.current.authenticated).toBe(true)
 
     act(() => {
@@ -78,8 +77,9 @@ describe('useUser()', () => {
   })
 
   it('should throw error if login fails', async () => {
-    const signInMock = jest.spyOn(require('services/users'), 'signIn')
-    signInMock.mockReturnValueOnce(Promise.reject('login error'))
+    const signInMock = jest
+      .spyOn(require('services/users'), 'signIn')
+      .mockReturnValueOnce(Promise.reject('login error'))
 
     const { result } = renderHook(() => useUser(), {
       wrapper

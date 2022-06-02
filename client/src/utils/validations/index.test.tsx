@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { signInValidate, signUpValidate } from '.'
 
 describe('validations', () => {
   /*
@@ -10,14 +10,53 @@ describe('validations', () => {
          de subir essa alteração
   */
   describe('signInValidate()', () => {
-    it.todo('should validate empty fields')
+    it('should validate empty fields', () => {
+      expect(signInValidate({ username: '', password: '' }))
+        .toMatchInlineSnapshot(`
+        Object {
+          "password": "senha obrigatória",
+          "username": "usuário obrigatório",
+        }
+      `)
+    })
   })
 
   describe('signUpValidate()', () => {
-    it.todo('should validate empty fields')
-    it.todo('should return short username error')
-    it.todo(
-      'should return error if password and confirm password does not match'
-    )
+    it('should validate empty fields', () => {
+      expect(
+        signUpValidate({ username: '', password: '', confirm_password: '' })
+      ).toMatchInlineSnapshot(`
+        Object {
+          "password": "senha obrigatória",
+          "username": "usuário obrigatório",
+        }
+      `)
+    })
+
+    it('should return short username error', () => {
+      expect(
+        signUpValidate({
+          username: 'abc',
+          password: 'senha123',
+          confirm_password: 'senha123'
+        })
+      ).toStrictEqual({
+        username: 'usuário precisa ter no mínimo 4 caracteres'
+      })
+    })
+
+    it('should return error if password and confirm password does not match', () => {
+      expect(
+        signUpValidate({
+          username: 'username',
+          password: 'senha123',
+          confirm_password: 'senha321'
+        })
+      ).toMatchInlineSnapshot(`
+        Object {
+          "confirm_password": "senhas não conferem",
+        }
+      `)
+    })
   })
 })

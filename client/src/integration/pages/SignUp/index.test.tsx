@@ -3,15 +3,9 @@ import userEvent from '@testing-library/user-event'
 import SignUp from '.'
 
 const mockedNavigate = jest.fn()
-const mockedSignUp = jest.fn()
 
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockedNavigate
-}))
-
-jest.mock('services/users', () => ({
-  signUp: () => Promise.resolve(mockedSignUp)
 }))
 
 describe('<SignUp />', () => {
@@ -36,6 +30,9 @@ describe('<SignUp />', () => {
   })
 
   it('should fill sign up and submit correctly', async () => {
+    const mockedSignUp = jest
+      .spyOn(require('services/users'), 'signUp')
+      .mockImplementation(() => Promise.resolve())
     render(<SignUp />)
 
     const userData = {
@@ -53,6 +50,10 @@ describe('<SignUp />', () => {
 
     userEvent.click(screen.getByRole('button', { name: /criar conta/i }))
 
-    // Signup call
+    expect(mockedSignUp).toHaveBeenCalledTimes(1)
+    expect(mockedSignUp).toHaveBeenCalledWith(
+      userData.username,
+      userData.password
+    )
   })
 })
