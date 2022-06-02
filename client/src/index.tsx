@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 
 import { UserProvider } from 'unit/hooks/use-user'
 import AppRoutes from 'routes'
@@ -10,9 +11,11 @@ root.render(
   <React.StrictMode>
     <div className="flex justify-center items-center min-h-screen">
       <Suspense fallback="Carregando...">
-        <UserProvider>
-          <AppRoutes />
-        </UserProvider>
+        <BrowserRouter>
+          <UserProvider>
+            <AppRoutes />
+          </UserProvider>
+        </BrowserRouter>
       </Suspense>
     </div>
   </React.StrictMode>

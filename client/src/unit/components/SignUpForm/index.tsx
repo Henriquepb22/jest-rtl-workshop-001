@@ -42,11 +42,14 @@ const SignUpForm = () => {
     const { username, password } = values
     await signUp(username, password)
     await login({ username, password })
-    setLoading(false)
   }
 
   return (
-    <form onSubmit={onSubmit} className={signUpFormClasses}>
+    <form
+      aria-label="Formulário de cadastro"
+      onSubmit={onSubmit}
+      className={signUpFormClasses}
+    >
       <TextField
         label="Usuário"
         name="username"

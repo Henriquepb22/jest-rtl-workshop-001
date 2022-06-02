@@ -32,7 +32,11 @@ const SignInForm = () => {
   }
 
   return (
-    <form onSubmit={onSubmit} className={signInFormClasses}>
+    <form
+      aria-label="Formulário de login" // Necessário para getByRole('form', { name: /formulário de login/i }) funcionar
+      onSubmit={onSubmit}
+      className={signInFormClasses}
+    >
       <TextField
         label="Usuário"
         name="username"

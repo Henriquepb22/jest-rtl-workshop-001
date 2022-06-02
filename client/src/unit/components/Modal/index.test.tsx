@@ -3,9 +3,9 @@ import Modal from '.'
 
 describe('<Modal />', () => {
   /*
-    Aqui a gente pode ver a necessidade do uso do .not para garantir que
-    antes de testarmos se um módulo está aparecendo na tela ele não estava
-    aparecendo antes
+    Nesse teste vemos a necessidade do uso do .not para garantir que o componente
+    não está na DOM antes de abrirmos ele.
+
     Por questões de performance o nosso modal precisa de uma refatoração para
     evitar que aumente a quantidade de elementos no dom e de lógica carregada
     sem necessidade
@@ -19,9 +19,7 @@ describe('<Modal />', () => {
 
     // expect(
     //   screen.queryByText(/algum conteúdo do modal/i)
-    // ).not.toBeInTheDocument()
-
-    expect(screen.getByText(/algum conteúdo do modal/i)).toBeInTheDocument()
+    // ).not.toBeInTheDocument() esse teste PRECISA passar
   })
 
   it.todo('should open modal')

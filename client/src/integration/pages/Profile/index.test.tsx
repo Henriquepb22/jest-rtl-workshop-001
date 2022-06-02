@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 
 describe('<Profile />', () => {
   /* 
-    Aqui a gente faz tanto teste unitário quanto de integração, testando exatamente
+    Dica: Aqui podemos fazer tanto teste unitário quanto de integração, testando exatamente
     todos os comportamentos da página
   */
   it.todo('should render the profile page with components correctly')
