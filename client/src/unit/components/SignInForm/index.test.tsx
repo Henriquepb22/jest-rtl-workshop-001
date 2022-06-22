@@ -16,7 +16,7 @@ describe('<SignInForm />', () => {
     expect(screen.getByRole('button', { name: /entrar/i })).toBeInTheDocument()
   })
 
-  it('should fill and submit the form', async () => {
+  it('should fill and submit the form', () => {
     render(<SignInForm />)
 
     const fakeUser = {
@@ -34,7 +34,7 @@ describe('<SignInForm />', () => {
     expect(screen.getByText(/carregando/i)).toBeInTheDocument()
   })
 
-  it('should return error if field incorrects', async () => {
+  it('should return error if field incorrects', () => {
     render(<SignInForm />)
 
     const fakeUser = {

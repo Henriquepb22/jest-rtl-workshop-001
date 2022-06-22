@@ -19,7 +19,7 @@ describe('<SignUpForm />', () => {
     ).toBeInTheDocument()
   })
 
-  it('should fill and submit the form', async () => {
+  it('should fill and submit the form', () => {
     render(<SignUpForm />)
 
     const fakeUser = {
@@ -38,7 +38,7 @@ describe('<SignUpForm />', () => {
     expect(screen.getByText(/carregando/i)).toBeInTheDocument()
   })
 
-  it('should return error if field incorrects', async () => {
+  it('should return error if field incorrects', () => {
     render(<SignUpForm />)
 
     const fakeUser = {

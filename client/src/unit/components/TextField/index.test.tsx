@@ -28,7 +28,7 @@ describe('<TextField />', () => {
     expect(screen.getByPlaceholderText(/placeholder/i)).toBeInTheDocument()
   })
 
-  it('should change its value when typing', async () => {
+  it('should change its value when typing', () => {
     const onInputChange = jest.fn()
     render(
       <TextField
@@ -38,13 +38,11 @@ describe('<TextField />', () => {
       />
     )
 
-    const input = screen.getByRole('textbox')
+    const input = screen.getByRole('textbox', { name: /textfield/i })
     const text = 'algum texto'
     userEvent.type(input, text)
 
-    await waitFor(() => {
-      expect(input).toHaveValue(text)
-    })
+    expect(input).toHaveValue(text)
     expect(onInputChange).toHaveBeenCalledTimes(text.length)
     expect(onInputChange).toHaveBeenCalledWith(text)
   })

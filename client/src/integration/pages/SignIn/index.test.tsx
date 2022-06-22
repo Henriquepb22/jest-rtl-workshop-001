@@ -34,7 +34,7 @@ describe('<SignIn />', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('/signup')
   })
 
-  it('should fill sign in and login correctly', async () => {
+  it('should fill sign in and login correctly', () => {
     const login = jest.fn()
 
     customRender(<SignIn />, {

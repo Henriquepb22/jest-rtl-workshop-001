@@ -29,7 +29,7 @@ describe('<SignUp />', () => {
     expect(mockedNavigate).toHaveBeenCalledWith('/')
   })
 
-  it('should fill sign up and submit correctly', async () => {
+  it('should fill sign up and submit correctly', () => {
     const mockedSignUp = jest
       .spyOn(require('services/users'), 'signUp')
       .mockImplementation(() => Promise.resolve())
