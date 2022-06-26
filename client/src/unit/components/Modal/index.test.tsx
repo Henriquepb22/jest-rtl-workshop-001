@@ -1,17 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Modal from '.'
 
 describe('<Modal />', () => {
-  /*
-    Nesse teste vemos a necessidade do uso do .not para garantir que o componente
-    não está na DOM antes de abrirmos ele.
-
-    Por questões de performance o nosso modal precisa de uma refatoração para
-    evitar que aumente a quantidade de elementos no dom e de lógica carregada
-    sem necessidade
-  */
-
   it('should render component Modal', () => {
     const { container } = render(<Modal>Content</Modal>)
 
@@ -22,24 +13,36 @@ describe('<Modal />', () => {
   it('should not find modal content', () => {
     render(<Modal>Content</Modal>)
 
-    expect(screen.queryByTestId('modal')).not.toBeInTheDocument()
+    expect(screen.queryByText(/content/i)).not.toBeInTheDocument()
   })
 
   it('should find modal content only click button', () => {
     render(<Modal>Content</Modal>)
 
-    expect(screen.queryByTestId('modal')).not.toBeInTheDocument()
+    expect(screen.queryByText(/content/i)).not.toBeInTheDocument()
     userEvent.click(screen.getByRole('button', { name: /abrir modal/i }))
-    expect(screen.getByTestId('modal')).toBeInTheDocument()
+    expect(screen.getByText(/content/i)).toBeInTheDocument()
   })
 
-  it('should close modal on click button', () => {
+  it('should close modal clicking on overlay', () => {
     render(<Modal>Content</Modal>)
 
-    expect(screen.queryByTestId('modal')).not.toBeInTheDocument()
+    expect(screen.queryByText(/content/i)).not.toBeInTheDocument()
     userEvent.click(screen.getByRole('button', { name: /abrir modal/i }))
-    expect(screen.getByTestId('modal')).toBeInTheDocument()
+    expect(screen.getByText(/content/i)).toBeInTheDocument()
+    userEvent.click(screen.getByLabelText(/fechar modal/i))
+    expect(screen.queryByText(/content/i)).not.toBeInTheDocument()
   })
 
-  it.todo('should close modal clicking on overlay')
+  // it('should close modal with esc key', () => {
+  //   // consultei e adaptei
+  //   const { container } = render(<Modal>Content</Modal>)
+
+  //   userEvent.click(screen.getByRole('button', { name: /abrir modal/i }))
+  //   const modal = screen.queryByText(/content/i)
+  //   expect(modal).toHaveAttribute('aria-hidden', 'false')
+
+  //   fireEvent.keyUp(container, { key: 'Escape' })
+  //   expect(modal).toHaveAttribute('aria-hidden', 'true')
+  // })
 })

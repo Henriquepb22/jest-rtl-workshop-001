@@ -27,7 +27,6 @@ const Modal = ({ children }: ModalProps) => {
           aria-label="modal"
           aria-hidden={!open}
           className={modalClasses(open)}
-          data-testid="modal"
         >
           <div
             aria-label="fechar modal"
