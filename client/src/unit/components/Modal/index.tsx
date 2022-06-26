@@ -22,18 +22,21 @@ const Modal = ({ children }: ModalProps) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>abrir modal</Button>
-      <div
-        aria-label="modal"
-        aria-hidden={!open}
-        className={modalClasses(open)}
-      >
+      {open && (
         <div
-          aria-label="fechar modal"
-          onClick={() => setOpen((v) => !v)}
-          className={overlayClasses(open)}
-        />
-        <div className={contentClasses}>{children}</div>
-      </div>
+          aria-label="modal"
+          aria-hidden={!open}
+          className={modalClasses(open)}
+          data-testid="modal"
+        >
+          <div
+            aria-label="fechar modal"
+            onClick={() => setOpen(!open)}
+            className={overlayClasses(open)}
+          />
+          <div className={contentClasses}>{children}</div>
+        </div>
+      )}
     </>
   )
 }
