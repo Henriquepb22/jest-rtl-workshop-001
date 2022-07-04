@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignInForm /> should render component 1`] = `
+<div>
+  <form
+    aria-label="Formulário de login"
+    class="flex flex-col gap-4 w-80"
+  >
+    <div
+      class="flex flex-col"
+    >
+      <label
+        class="font-bold"
+        for="username"
+      >
+        Usuário
+      </label>
+      <input
+        class="bg-gray-200 rounded p-2 border-2 border-gray-300 hover:bg-white hover:border-2 hover:border-pink-600 focus:outline-pink-600 focus:bg-white "
+        id="username"
+        name="username"
+        placeholder="Insira seu nome de usuário"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="flex flex-col"
+    >
+      <label
+        class="font-bold"
+        for="password"
+      >
+        Senha
+      </label>
+      <input
+        class="bg-gray-200 rounded p-2 border-2 border-gray-300 hover:bg-white hover:border-2 hover:border-pink-600 focus:outline-pink-600 focus:bg-white "
+        id="password"
+        name="password"
+        placeholder="Insira sua senha"
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      class="px-4 py-2 text-base bg-pink-600 text-white rounded w-full transition hover:opacity-80 disabled:opacity-70 disabled:cursor-not-allowed"
+    >
+      <span>
+        Entrar
+      </span>
+    </button>
+  </form>
+</div>
+`;
