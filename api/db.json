@@ -6,12 +6,9 @@
       "password": "senha123"
     },
     {
-      "id": 2
-    },
-    {
       "username": "teste",
       "password": "123123",
-      "id": 3
+      "id": 2
     }
   ]
 }
