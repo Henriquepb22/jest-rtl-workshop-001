@@ -20,8 +20,7 @@
   "jest": {
     "collectCoverageFrom": [
       "!src/index.tsx",
-      "!src/**/*.d.ts",
-      "!src/**/styles.ts"
+      "!src/**/*.d.ts"
     ]
   },
   "browserslist": {
