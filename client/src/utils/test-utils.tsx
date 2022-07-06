@@ -1,5 +1,5 @@
 import { ReactElement } from 'react'
-import { render } from '@testing-library/react'
+import { render, RenderOptions } from '@testing-library/react'
 
 import {
   UserContextData,
@@ -9,7 +9,7 @@ import {
 
 type CustomRenderProps = {
   userProviderProps?: UserContextData
-}
+} & RenderOptions
 
 /* 
   Para evitar duplicacão de código, podemos criar um utilitário de testes com uma renderização personalizada
