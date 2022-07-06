@@ -1,17 +1,40 @@
-import { screen, render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import TextField from './index'
 
 describe('<TextField />', () => {
-  /* 
-    Em componentes o ideal é só ter testes unitários, só deve ter testes de integração se um
-    componente utiliza outro em sua estrutura
-  */
-  it.todo('should render correctly')
-  it.todo('should render with label')
-  it.todo('should render without label')
-  it.todo('should render with placeholder')
+  it('should render correctly', () => {
+    render(<TextField />)
+
+    expect(screen.getByRole('textbox')).toBeInTheDocument()
+  })
+
+  it('should render with label', () => {
+    render(<TextField label="label" />)
+
+    expect(screen.getByLabelText(/label/i)).toBeInTheDocument()
+  })
+
+  it('should render without label', () => {
+    render(<TextField />)
+
+    expect(screen.queryByLabelText(/label/i)).not.toBeInTheDocument()
+  })
+
+  it('should render with placeholder', () => {
+    render(<TextField placeholder="placeholder" />)
+
+    expect(screen.getByPlaceholderText(/placeholder/i)).toBeInTheDocument()
+  })
+
+  it('should render with error', () => {
+    render(<TextField error="algum erro" />)
+
+    expect(screen.getByText('algum erro')).toBeInTheDocument()
+  })
+
   it.todo('should change its value when typing')
   it.todo('does not changes its value when disabled')
-  it.todo('should render with error')
   it.todo('is accessible by tab')
   it.todo('is not acessible by tab when disabled')
 })
